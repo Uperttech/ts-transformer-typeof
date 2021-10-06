@@ -1,21 +1,30 @@
 import { typeOf } from '../index'
 import assert from 'assert'
 
+function MethodDecorator(n: number) {
+  return (target: any, propertyKey: string) => {}
+}
+
+function ClassDecorator(s: string) {
+  return (constructor: Function) => {}
+}
+
 describe('keys', () => {
   it('should return info of given type', () => {
     assert.deepStrictEqual(typeOf(), {})
     assert.deepStrictEqual(typeOf<any>(), {
-      decorators: [],
+      decorators: {},
       name: '',
       properties: {}
     })
+
     interface Foo {
-      foo: string
+      foo: string 
     }
 
     assert.deepStrictEqual(typeOf<Foo>(), {
       name: "Foo",
-      decorators: [],
+      decorators: {},
       properties: {
         foo: {
           type: "string",
@@ -23,7 +32,32 @@ describe('keys', () => {
             optional: false,
             readonly: false
           },
-          decorators: []
+          decorators: {}
+        }
+      }
+    })
+
+    @ClassDecorator("test")
+    class FooDecorated {
+      @MethodDecorator(123)
+      foo: string = ""
+    }
+
+    assert.deepStrictEqual(typeOf<FooDecorated>(), {
+      name: "FooDecorated",
+      decorators: {
+        ClassDecorator: ['test']
+      },
+      properties: {
+        foo: {
+          type: "string",
+          modifiers: {
+            optional: false,
+            readonly: false
+          },
+          decorators: {
+            MethodDecorator: ['123']
+          }
         }
       }
     })
@@ -35,7 +69,7 @@ describe('keys', () => {
 
     assert.deepStrictEqual(typeOf<FooBar>(), {
       name: "FooBar",
-      decorators: [],
+      decorators: {},
       properties: {
         foo: {
           type: "string",
@@ -43,7 +77,7 @@ describe('keys', () => {
             optional: false,
             readonly: true
           },
-          decorators: []
+          decorators: {}
         },
         bar: {
           type: "number",
@@ -51,7 +85,7 @@ describe('keys', () => {
             optional: true,
             readonly: false
           },
-          decorators: []
+          decorators: {}
         }
       }
     })
@@ -63,7 +97,7 @@ describe('keys', () => {
 
     assert.deepStrictEqual(typeOf<FooBar & BarBaz>(), {
       name: "",
-      decorators: [],
+      decorators: {},
       properties: {
         foo: {
           type: "string",
@@ -71,7 +105,7 @@ describe('keys', () => {
             optional: false,
             readonly: true
           },
-          decorators: []
+          decorators: {}
         },
         bar: {
           type: "null",
@@ -79,7 +113,7 @@ describe('keys', () => {
             optional: false,
             readonly: false
           },
-          decorators: []
+          decorators: {}
         },
         baz: {
           type: "bigint",
@@ -87,17 +121,17 @@ describe('keys', () => {
             optional: false,
             readonly: false
           },
-          decorators: []
+          decorators: {}
         }
       }
     })
 
     assert.deepStrictEqual(typeOf<FooBar | BarBaz>(), {
-      decorators: [],
+      decorators: {},
       name: '',
       properties: {
         bar: {
-          decorators: [],
+          decorators: {},
           modifiers: {
             optional: false,
             readonly: false
@@ -108,13 +142,13 @@ describe('keys', () => {
     })
 
     assert.deepStrictEqual(typeOf<FooBar & any>(), {
-      decorators: [],
+      decorators: {},
       name: '',
       properties: {}
     })
 
     assert.deepStrictEqual(typeOf<FooBar | any>(), {
-      decorators: [],
+      decorators: {},
       name: '',
       properties: {}
     })

@@ -86,6 +86,10 @@ function getTypeName(type: ts.Type): string {
   return ""
 }
 
+function getDecoratorArguments(decorator: ts.Decorator): any[] {
+  return (decorator.expression as any)?.arguments.map((a: any) => a.text)
+}
+
 
 function generateTypeInfoObject(typeNode: ts.TypeNode, typeChecker: ts.TypeChecker): ts.ObjectLiteralExpression {
   const type = typeChecker.getTypeFromTypeNode(typeNode)
@@ -98,11 +102,15 @@ function generateTypeInfoObject(typeNode: ts.TypeNode, typeChecker: ts.TypeCheck
     ),
     ts.factory.createPropertyAssignment(
       'decorators', 
-      ts.factory.createArrayLiteralExpression(
-        properties[0]?.valueDeclaration?.parent?.decorators?.map(
-          decorator => ts.factory.createStringLiteral(getDecoratorName(decorator.expression)))
-      )
-    ),
+      ts.factory.createObjectLiteralExpression(
+        type.symbol?.valueDeclaration?.decorators?.map(
+          decorator => ts.factory.createPropertyAssignment(
+            getDecoratorName(decorator.expression),
+            ts.factory.createArrayLiteralExpression(
+              getDecoratorArguments(decorator).map(arg => ts.factory.createStringLiteral(arg))
+            )
+          ))
+    )),
     ts.factory.createPropertyAssignment(
       'properties',
       ts.factory.createObjectLiteralExpression(
@@ -119,11 +127,15 @@ function generateTypeInfoObject(typeNode: ts.TypeNode, typeChecker: ts.TypeCheck
             ),
             ts.factory.createPropertyAssignment(
               'decorators',
-              ts.factory.createArrayLiteralExpression(
+              ts.factory.createObjectLiteralExpression(
                 property?.valueDeclaration?.decorators?.map(
-                  decorator => ts.factory.createStringLiteral(getDecoratorName(decorator.expression)))
-              )
-            ),
+                  decorator => ts.factory.createPropertyAssignment(
+                    getDecoratorName(decorator.expression),
+                    ts.factory.createArrayLiteralExpression(
+                      getDecoratorArguments(decorator).map(arg => ts.factory.createStringLiteral(arg))
+                    )
+                  ))
+            )),
             ts.factory.createPropertyAssignment(
               'modifiers',
               ts.factory.createObjectLiteralExpression(

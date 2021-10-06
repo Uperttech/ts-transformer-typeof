@@ -3,22 +3,19 @@ export type Modifiers = {
     optional: boolean
 }
 
-type Decorator = {
-    name: string
-    arguments: any[]
-}
+type Decorators = Record<string, string[]>
 
 type BasicTypes = "string" | "array" | "number" | "boolean" | "bigint" | "null" | "function"
 
 type TypeProperty<U extends keyof T, T> = {
     type: BasicTypes | TypeInfo<T[U]>
-    decorators: Decorator[]
+    decorators: Decorators
     modifiers: Modifiers
 }
 
 export type TypeInfo<T> = {
     name: string
-    decorators: Decorator[]
+    decorators: Decorators
     properties: Record<keyof T, TypeProperty<keyof T, T>>
 }
 

@@ -1,3 +1,4 @@
+import { triggerAsyncId } from 'async_hooks';
 import ts from 'typescript';
 import transformer from '../../transformer';
 
@@ -7,6 +8,7 @@ export function compile(filePaths: string[], target = ts.ScriptTarget.ES5, write
     noEmitOnError: true,
     suppressImplicitAnyIndexErrors: true,
     esModuleInterop: true,
+    experimentalDecorators: true,
     target
   });
   const transformers: ts.CustomTransformers = {
