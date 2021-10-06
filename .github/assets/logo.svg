@@ -1,0 +1,19 @@
+<svg id="Grupo_1" data-name="Grupo 1" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <rect id="BG" width="800" height="800" rx="113" fill="#002538"/>
+  <g id="Logo" transform="translate(-147.101 -11.86)">
+    <rect id="Retângulo_1" data-name="Retângulo 1" width="132" height="109" rx="21" transform="translate(281.101 375.86)" fill="#01619d"/>
+    <rect id="Retângulo_2" data-name="Retângulo 2" width="132" height="109" rx="21" transform="translate(429.101 254.86)" fill="#01619d"/>
+    <rect id="Retângulo_3" data-name="Retângulo 3" width="131" height="109" rx="21" transform="translate(536.101 459.86)" fill="#01619d"/>
+    <rect id="Retângulo_4" data-name="Retângulo 4" width="132" height="110" rx="21" transform="translate(681.101 335.86)" fill="#01619d"/>
+    <rect id="Retângulo_5" data-name="Retângulo 5" width="81" height="84" rx="21" transform="translate(698.101 464.86)" fill="#01619d"/>
+    <rect id="Retângulo_6" data-name="Retângulo 6" width="67" height="64" rx="21" transform="translate(567.101 369.86)" fill="#01619d"/>
+    <rect id="Retângulo_8" data-name="Retângulo 8" width="81" height="84" rx="21" transform="translate(315.101 268.86)" fill="#01619d"/>
+    <rect id="Retângulo_7" data-name="Retângulo 7" width="67" height="64" rx="21" transform="translate(460.101 386.86)" fill="#01619d"/>
+    <g id="Connections">
+      <rect id="Retângulo_9" data-name="Retângulo 9" width="58.822" height="19.607" transform="matrix(0.719, -0.695, 0.695, 0.719, 393.308, 381.704)" fill="#01619d"/>
+      <rect id="Retângulo_10" data-name="Retângulo 10" width="58.822" height="19.607" transform="translate(522.254 430.23) rotate(45)" fill="#01619d"/>
+      <rect id="Retângulo_11" data-name="Retângulo 11" width="58.822" height="19.607" transform="translate(550.264 340.596) rotate(45)" fill="#01619d"/>
+      <rect id="Retângulo_12" data-name="Retângulo 12" width="58.822" height="19.607" transform="translate(703.9 435.692) rotate(135)" fill="#01619d"/>
+    </g>
+  </g>
+</svg>
